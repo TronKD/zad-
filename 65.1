@@ -1,4 +1,4 @@
-MainPage.xaml
+uMainPage.xaml
 <StackPanel x:Name="contentPanel" Margin="20,30,0,0">
 <TextBlock HorizontalAlignment="Center" FontSize="36" Text="Kalkulator VAT" />
 <Button x:Name="inputButton2" Width="87" HorizontalAlignment="Center" Click="Button_Click" Content="Licz!" />
@@ -25,7 +25,7 @@ class file {
 };
 
 file::file() {
-    inFile.open("ciagi.txt");
+    inFile.open("dane_ulamki.txt");
     if (!inFile.good())
         {
                 cerr << "Blad - pliku nie da sie otworzyc!\n";
