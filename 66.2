@@ -1,0 +1,59 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cstdlib>
+
+using namespace std; 
+ 
+class file {  
+    protected:
+                ifstream inFile;      
+               
+    public:    
+        file();
+        ~file();
+        virtual void loop()=0;
+};
+
+file::file() {
+    inFile.open("trojki.txt", ios::in);
+    if (!inFile.good()){
+            cerr << "Blad - pliku nie da sie otworzyc!\n";
+            exit(1);
+        }
+}
+
+
+file::~file() {
+    inFile.close();
+}
+
+class plik : public file { 
+	int a,b,c;            
+	bool pierwsza(int);
+
+    public:
+        virtual void loop();       
+};
+
+bool plik::pierwsza(int x){ 
+	if (x<2) return false;
+ 	for (int k=2; k*k<=x; k++)
+ 	if (x%k==0) return false;
+ 	return true;
+}
+
+void plik ::loop()
+{	 
+	if ((a*b)==c){
+		if (pierwsza(a)&&pierwsza(b))
+ 		printf("%i %i %i\n",a, b, c);
+	}
+	cout<< printf << endl;
+}
+
+int main(int argc, char** argv) {
+    plik  pl;
+    pl.loop();
+    return 0;
+} 
