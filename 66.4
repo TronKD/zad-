@@ -36,7 +36,7 @@ class plik : public file {
 };
 
 int plik::czy_trojkat(int a, int b, int c){
-	return((a+b>c)&&(b+c>a)&&(a+c>b));
+	return((a+b>c)&&(b+c<a)&&(a+c<b));
 } 
 
 void plik ::loop()
