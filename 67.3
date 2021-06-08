@@ -1,0 +1,34 @@
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <string.h>
+#include <math.h>
+
+using namespace std; 
+
+int fib(int n)
+{
+	if(n<3)
+		return 1;
+	
+	return fib(n-2)+fib(n-1);
+}
+
+int main(int argc, char** argv) {
+	ofstream wyp;
+	wyp.open("wyniki.txt");
+	const int n = 40;
+ 	for (int i = 1; i <= n; i++) {
+ 		if(fib(i)){
+			//cout << "\n" << fib(i) << "\n";
+			char str_f[300];
+			itoa(fib(i),str_f,2);			
+			for (int i = 0; i <= 27 - strlen(str_f); i++){
+				cout << 0;
+			}
+			cout << str_f << endl;
+			wyp << "\n" << str_f;
+		}
+	} 
+    return 0;
+} 
