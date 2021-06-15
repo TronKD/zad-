@@ -5,33 +5,49 @@
 using namespace std;
 
 string s1[2000];
+int c1[2000][10];
 
-bool jednolity(string s)
-{
+bool jednolity(string s){
     for(int i=1; i<s.length();i++)
         if (s[i]!=s[i-1]) return false;
     return true;
 }
 
+bool czyAnag(int t1[10], int t2[10]){
+    int i;
+    for(i=0;i<10;i++)
+        if (t1[i]!=t2[i]) return false;
 
-int main()
-{
+    return true;
+}
+
+void zamien(string slowo, int t[10]){   
+	int i;
+    for(i=0;i<10;i++)
+        t[i] = 0;
+    for(i=0;i<slowo.length();i++)
+        t[slowo[i] - 65]++;
+}
+
+int main(){
 	ifstream in;
 	ofstream out;
 	in.open("dane_napisy.txt");
-	out.open("wynik_napisy.txt");
+	out.open("wyniki_anagramy.txt");
 
-    int ileZ1 =0;
-	for (int i=0; i<2000; i++)
-	{
+    int ileZ2 =0 , ileZ1 =0;
+	for (int i=0; i<2000; i++){
 		in >> s1[i];
+		zamien(s1[i],c1[i]);
+		if (czyAnag(c1[i],c1[i-1])) ileZ2++;
         if (jednolity(s1[i]) && (s1[i]==s1[i-1])){
             ileZ1 ++;
         }   
 	}
-
     cout << ileZ1  << endl;
 	out << ileZ1  << endl;
+	cout << ileZ2  << endl;
+	out << ileZ2  << endl;
     out.close();
 
     return 0;
