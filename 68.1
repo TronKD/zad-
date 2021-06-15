@@ -1,28 +1,38 @@
 #include <iostream>
+#include <stdio.h>
 #include <string>
 #include <fstream>
-
 using namespace std;
 
-bool jednolity(string s){ 
-	int d=s.length();
- 	for(int i=1; i<d; i++)
- 		if (s[i]!=s[i-1]) return false;
-  return true;
-} 
+string s1[2000];
 
-int main(int argc, char** argv) {
-	ifstream File;
-	File.open("dane_napisy.txt");
-	ofstream wyp;
-	wyp.open("wyniki_anagramy.txt");
-	int ileZ1=0;
-	string s1[1000], s2[1000];
- 	for (int i=0; i<1000; i++)
- 		if (jednolity(s1[i]))
- 			if (s1[i]==s2[i]) ileZ1++;
-			File.close(); 
- 	cout << ileZ1 << endl;
-	 wyp << ileZ1 << endl;	 
-	return 0;
+bool jednolity(string s)
+{
+    for(int i=1; i<s.length();i++)
+        if (s[i]!=s[i-1]) return false;
+    return true;
+}
+
+
+int main()
+{
+	ifstream in;
+	ofstream out;
+	in.open("dane_napisy.txt");
+	out.open("wynik_napisy.txt");
+
+    int ileZ1 =0;
+	for (int i=0; i<2000; i++)
+	{
+		in >> s1[i];
+        if (jednolity(s1[i]) && (s1[i]==s1[i-1])){
+            ileZ1 ++;
+        }   
+	}
+
+    cout << ileZ1  << endl;
+	out << ileZ1  << endl;
+    out.close();
+
+    return 0;
 }
