@@ -1,0 +1,61 @@
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <fstream>
+
+using namespace std;
+
+string s1[2000];
+int c1[2000][10];
+int c2[2000][10];
+
+bool czyAnag(int c1[10], int c2[10]){
+    int i;
+    for(i=0;i<10;i++)
+        if (c1[i]!=c2[i]) return false;
+
+    return true;
+}
+
+void zamien(string slowo, int t[10]){   
+	int i;
+    for(i=0;i<10;i++)
+        t[i] = 0;
+    for(i=0;i<slowo.length();i++)
+        t[slowo[i] - 65]++;
+}
+
+int zad3Pom(int c[10], int liczbaslow){ 
+	int ile=0,j;
+ 	for(j=0; j< liczbaslow; j++){
+ 		if (czyAnag(c,c1[j])) ile++;
+ 		if (czyAnag(c,c2[j])) ile++;
+ 	}
+ return ile;
+}
+
+int main(){
+	ifstream in;
+	ofstream out;
+	in.open("dane_napisy.txt");
+	out.open("wyniki_anagramy.txt");
+
+	for (int i=0; i<2000; i++){
+		in >> s1[i];
+		zamien(s1[i],c1[i]);
+		if (czyAnag(c1[i],c1[i-1]));
+	}
+	
+	int i, ilePowt, maxPowt=0;
+ 	for(i=0; i<1000; i++){
+ 		ilePowt=zad3Pom(c1[i],1000);
+ 		if (ilePowt>maxPowt) maxPowt=ilePowt;
+ 		ilePowt=zad3Pom(c1[i-1],1000);
+ 		if (ilePowt>maxPowt) maxPowt=ilePowt;
+ 	} 	
+ 	cout << maxPowt << endl;
+ 	out << maxPowt << endl;
+ 	out.close();
+
+    return 0;
+}
