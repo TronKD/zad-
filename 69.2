@@ -1,0 +1,95 @@
+#include <cstdlib>
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <fstream>
+#include <time.h>
+using namespace std;
+
+
+typedef struct{
+    int bg;
+    int end;
+}Gen;
+#define ROZ 1000
+string genotypes[ROZ];
+ofstream out;
+
+string mut="BCDDC";
+int ile;
+
+Gen nextGen(string s, int i)
+{   int len=s.length();
+    Gen pom;
+    pom.bg=pom.end=len;
+
+    while (i<len-4 && (s[i]!='A' || s[i+1]!='A'))
+        i++;
+    if (i>len-4)
+        return pom;
+    pom.bg=i;
+    while (i<len-1 && (s[i]!='B' || s[i+1]!='B'))
+        i++;
+    if (i==len-1)
+        { pom.bg=len; return pom;}
+    pom.end=i+1;
+
+    return pom;
+}
+
+bool czyMutacjaGen(string s, int bg, int end)
+{   int len = mut.length();
+    if (bg<0) return false;
+    while (bg<=end-len+1) {
+        if (mut==s.substr(bg,len))
+            return true;
+        bg++;
+    }
+    return false;
+}
+
+
+bool czyMutacjaGenotyp(string s)
+{
+    int lenMut= mut.length();
+    Gen  pom;
+    bool czyM=false;
+
+    pom.bg=0;
+    int i=0;
+    do{
+        pom = nextGen(s,pom.bg);
+        if (czyMutacjaGen(s,pom.bg,pom.end))
+            return true;
+        pom.bg=max(pom.bg,pom.end)+1;
+    } while(pom.bg<s.length());
+    return false;
+}
+
+void zad2(){
+    int ilemut=0,i,j, stat[5];
+    char z;
+
+    for(i=0;i<ile;i++)
+        if (czyMutacjaGenotyp(genotypes[i])) ilemut++;
+    out << "Zadanie 2: " << ilemut << endl;
+    cout << "Zadanie 2: " << ilemut << endl;
+
+}
+
+int main()
+{   long long i;
+    srand (time(NULL));
+	ifstream in;
+	in.open("dane_geny.txt");
+	out.open("wyniki_geny.txt");
+	
+    ile=ROZ;
+    for(i=0;i<ile;i++){
+        in >> genotypes[i];
+    }
+
+    zad2();
+    out.close();
+    return 0;
+}
