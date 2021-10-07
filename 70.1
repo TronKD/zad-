@@ -1,0 +1,31 @@
+#include <iostream>
+
+using namespace std;
+
+double f(double x) {
+	return  (x*x*x*x/500-x*x/200-3.0/250);
+}
+
+double g(double x) {
+	return (-x*x*x/30+x/20+1.0/6);
+}
+
+double zaslona() {
+	double sumf = 0;
+	double sumg = 0;
+	double x = 2;
+	double szer = 0.00001;
+	
+	while(x < 10) {
+		x += szer;
+		sumf += szer * g(x);
+		sumg += szer * f(x);
+	}
+	
+	return -sumf + sumg;
+}
+
+int main(int argc, char** argv) {
+	cout << zaslona();
+	return 0;
+}
