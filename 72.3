@@ -1,0 +1,37 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+const int N = 200;
+
+
+int koncowka(string A, string B)
+{
+    int dA = A.length();
+    int dB = B.length();
+    int k = 0;
+    while(k<dA && k<dB && A[dA-1-k]==B[dB-1-k])
+        k++;
+    return k;
+}
+
+int main()
+{
+    ifstream in("napisy.txt");
+    int d = 0;
+    string pierwszy[N],drugi[N];
+    int w[N];
+    for(int i=0; i<N; i++)
+    {
+        in >> pierwszy[i] >> drugi[i];
+        w[i] = koncowka(pierwszy[i],drugi[i]);
+        if (w[i] > d)
+            d = w[i];
+    }
+    cout << "Max: " << d << endl;
+    for(int i=0; i<N; i++)
+        if (w[i]==d)
+            cout << pierwszy[i] << " " << drugi[i] << endl;
+}
