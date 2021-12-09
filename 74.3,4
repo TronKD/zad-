@@ -1,0 +1,53 @@
+#include<iostream>
+#include<string>
+#include<fstream>
+#include<algorithm>
+#include<vector>
+
+using namespace std;
+
+bool kolejne(char a,char b,char c,char d)
+{
+	char T[4] = { a,b,c,d }; sort(T, T+4);
+	a = T[0]; b = T[1]; c = T[2]; d = T[3];
+	return (a+1==b && b+1==c && c+1==d);
+}
+bool kolejne4(string s)
+{
+	if ( s.size()<4 ) return false;
+	for (unsigned int i=3; i<s.size(); i++)
+		if ( kolejne(s[i-3], s[i-2], s[i-1],  s[i]) ) return true;
+	return false;
+}
+bool wszystko(string s)
+{
+	bool w=false, az=false, AZ=false;
+	for (char c : s)
+		if ( '0' <= c && c <= '9' ) w = true;
+		else if ( 'a' <= c && c <= 'z' ) az = true;
+		else if ( 'A' <= c && c <= 'Z' ) AZ = true;
+	return w && az && AZ;
+}
+
+vector<string> hasla;
+void zad3()
+{
+	int odp = 0;
+	for (string s : hasla) if ( kolejne4(s) ) odp++;
+	cout << "Zad 3:\n" << odp << endl;
+}
+void zad4()
+{
+	int odp = 0;
+	for (string s : hasla) if ( wszystko(s) ) odp++;
+	cout << "Zad 4:\n" << odp << endl;
+}
+int main()
+{
+    ifstream in("hasla.txt");
+	int N = 200;
+	hasla.resize(N);
+	for (int i=0; i<N; i++) in >> hasla[i];
+	zad3();
+	zad4();
+}
