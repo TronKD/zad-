@@ -12,7 +12,7 @@ int main()
     ifstream in("tekst.txt");
     ofstream out("wyniki.txt",fstream::app);
     out << "Zaszyfrowane slowa min 10 lit.:" << endl;
-    for(int k=0; k<slowa; k++)
+    for(int i=0; i<slowa; i++)
     {
         in >> S;
         for(int i=0; i<S.length(); i++)
