@@ -6,7 +6,8 @@
 
 using namespace std;
 
-int n, P[50];
+const int n2=15;
+int n, P[50], P2[n2];
 
 string szyfr(string A)
 {
@@ -14,12 +15,31 @@ string szyfr(string A)
     return A;
 }
 
-int main()
+string szyfr2(string A)
 {
-	ifstream in("szyfr1");
+    for (int i=0; i<A.size(); i++) swap(A[i], A[P2[i%n2]-1]);
+    return A;
+}
+
+s(){
+	ifstream in("szyfr1.txt");
 	n = 50;
 	string tekst[6];
     for (int i=0; i<6; i++) in >> tekst[i];
     for (int i=0; i<n; i++) in >> P[i];
     for (int i=0; i<6; i++) cout << szyfr( tekst[i] ) << endl;
+}
+
+sz(){
+	ifstream in("szyfr2.txt");
+	string tekst;
+    in >> tekst;
+    for (int i=0; i<n2; i++) in >> P2[i];
+    cout << endl ;
+    cout << szyfr2( tekst ) << endl;
+}
+int main()
+{   
+s();
+sz();
 }
