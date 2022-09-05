@@ -7,7 +7,7 @@ double szesnastkowystkowy() {
 	printf("a = %x", a);
 }
 double zmiennoprzecinkowy(){
-	double a1;
+	float a1;
 	scanf("%f",&a1);
 	printf("a = %.2f", a1);
 }
