@@ -7,13 +7,13 @@ double szesnastkowystkowy() {
 	printf("a = %x", a);
 }
 double zmiennoprzecinkowy(){
-	float a;
-	scanf("%d",&a);
-	printf("a = %.2f", a);
+	double a1;
+	scanf("%f",&a1);
+	printf("a = %.2f", a1);
 }
 int main(int argc, char *argv[]) {
 	int koniec;
-	int a;
+	char a;
 
 	do{
 	 printf("\nPodaj co chcesz liczyc: \n1- szesnastkowystkowy \n2- zmiennoprzecinkowy \n3- koniec \n");
@@ -21,17 +21,19 @@ int main(int argc, char *argv[]) {
 
 	switch (key){
 		case '1':
-			a = szesnastkowystkowy();
+			szesnastkowystkowy();
 		break;
 		case '2':
-			a = zmiennoprzecinkowy();
+			zmiennoprzecinkowy();
 		break;
 		case '3': 
 		   printf("Koncze");
+		   return a;
    		break;
    		default : 
 		   printf("Bledna opcja");
+		break;
 	}
-	}while(a!=3);
+	}while(a!='3');
 	return 0;
 }
