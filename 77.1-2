@@ -1,0 +1,61 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+string Vigenere(string tresc, string klucz, bool szyfruj) {
+    int n = tresc.length();
+    int nk = klucz.length();
+    
+    string q = "";
+    int powtorzenia = 1;
+    int j = 0;
+    for (int i=0; i<n; i++) {
+        char c = tresc[i];
+        if (c>='A' && c<='Z') {
+            c = klucz[j];
+            j++;
+            if (j==nk) { j=0; powtorzenia++; }
+        }
+        q += c;
+    }
+    cout << powtorzenia <<" powtorzenia klucza\n";
+
+    string t="";
+    for (int i=0; i<n; i++) {
+        char c = tresc[i];
+        if (c>='A' && c<='Z') {
+            int k = q[i]-int('A');
+            if (szyfruj) {          // szyfruj
+                c += k;
+                if (c>'Z') c -=26;
+            }
+            else {                  // deszyfruj
+                c -= k;
+                if (c<'A') c +=26;
+            }
+        }
+        t += c;
+    }
+    return t;
+}
+
+int main()
+{
+    // zadanie 1
+    string s;
+    ifstream we("dokad.txt");
+    getline(we,s);
+    we.close();
+    string klucz = "LUBIMYCZYTAC";
+    cout << Vigenere(s,klucz,true) << "\n" << endl;
+
+    // zadanie 2
+    we.open("szyfr.txt");
+    getline(we,s);
+    getline(we,klucz);
+    we.close();
+    cout << Vigenere(s,klucz,false) << endl;
+
+    return 0;
+}
